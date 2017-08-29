@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Item({ item }) {
   return (
     <li>
-      <Link to="/">{item.content}</Link>
+      <Link to={`/Detail/${item.articleId}`}>{item.content}</Link>
     </li>
   );
 }
