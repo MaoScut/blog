@@ -10,8 +10,15 @@ import * as actions from '../../action/async';
 //   );
 // }
 class Detail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
   componentDidMount() {
     this.props.actions.fetchExactArticle(this.props.match.params.articleId);
+  }
+  handleClick() {
+    this.props.history.push(`/Editor/${this.props.match.params.articleId}`);
   }
   render() {
     let content = 'loading';
@@ -19,6 +26,7 @@ class Detail extends React.Component {
     return (
       <div>
         {content}
+        <button onClick={this.handleClick}>跳转</button>
       </div>
     );
   }
