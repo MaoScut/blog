@@ -1,5 +1,7 @@
+import Cookie from 'js-cookie';
 import * as ActionTypes from '../actionTypes';
 import * as api from '../store';
+import history from '../history';
 
 export function fetchArticles() {
   return (dispatch) => {
@@ -18,5 +20,49 @@ export function fetchExactArticle(articleId) {
         payload: article,
       });
     });
+  };
+}
+
+function errorHandler(dispatch, error, type) {
+  if (error.status === 401) {
+    dispatch({
+      type,
+      payload: 'you are not authorized to do this',
+    });
+  } else {
+    dispatch({
+      type,
+      payload: error.message,
+    });
+  }
+}
+
+export function registerUser({ email, password }) {
+  return (dispatch) => {
+    api.registerUser({ email, password }, (error, response) => {
+      if (error) return errorHandler(dispatch, error, ActionTypes.AUTH_ERROR);
+      Cookie.set('token', response);
+      dispatch({ type: ActionTypes.AUTH_USER });
+      history.push('/');
+    });
+  };
+}
+
+export function loginUser({ email, password }) {
+  return (dispatch) => {
+    api.loginUser({ email, password }, (error, response) => {
+      if (error) return errorHandler(dispatch, error, ActionTypes.AUTH_ERROR);
+      Cookie.set('token', response);
+      dispatch({ type: ActionTypes.AUTH_USER });
+      history.push('/');
+    });
+  };
+}
+
+export function logoutUser() {
+  return (dispatch) => {
+    Cookie.remove('token');
+    dispatch({ type: ActionTypes.UNAUTH_USER });
+    history.push('/login');
   };
 }
