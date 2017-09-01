@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../action/async';
 
-class Regist extends React.Component {
+export default class Regist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,15 +40,9 @@ class Regist extends React.Component {
           }}
           onChange={this.savePassword}
         />
-        <button onClick={() => this.props.actions.registerUser({ email: this.state.email, password: this.state.password })}>login</button>
+        <button onClick={() => this.props.actions.registerUser({ email: this.state.email, password: this.state.password })}>regist</button>
       </div>
     );
   }
 }
 
-export default connect(
-  state => state,
-  dispatch => ({
-    actions: bindActionCreators(actions, dispatch),
-  }),
-)(Regist);

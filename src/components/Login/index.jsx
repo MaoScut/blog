@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../../action/async';
+// import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+// import * as actions from '../../action/async';
 
-class Login extends React.Component {
+export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,9 +46,9 @@ class Login extends React.Component {
   }
 }
 
-export default connect(
-  state => state,
-  dispatch => ({
-    actions: bindActionCreators(actions, dispatch),
-  }),
-)(Login);
+// export default connect(
+//   state => state,
+//   dispatch => ({
+//     actions: bindActionCreators(actions, dispatch),
+//   }),
+// )(Login);
