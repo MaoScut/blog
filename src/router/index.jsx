@@ -1,21 +1,23 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
-import Home from '../components/Home';
+// import Home from '../components/Home';
 import Detail from '../components/Detail';
 import Editor from '../components/Editor';
-import Header from '../components/Header';
-import Login from '../components/Login';
-import Regist from '../components/Regist';
+// import Header from '../components/Header';
+// import Login from '../components/Login';
+// import Regist from '../components/Regist';
+import { Home, Header, Login, Regist, Error } from '../components/Connected';
 import history from '../history';
 
 export default () => (
   <Router history={history}>
     <div>
       <Route path="/" component={Header} />
+      <Route path="/" component={Error} />      
       <Route exact path="/" component={Home} />
-      <Route exact path="/Home" component={Home} />
-      <Route path="/Detail/:articleId" component={Detail} />
-      <Route path="/Editor/:articleId" component={Editor} />
+      <Route exact path="/home" component={Home} />
+      <Route path="/detail/:articleId" component={Detail} />
+      <Route path="/editor/:articleId" component={Editor} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/regist" component={Regist} />
     </div>
