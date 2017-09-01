@@ -53,7 +53,7 @@ export function loginUser({ email, password }) {
     api.loginUser({ email, password }, (error, response) => {
       if (error) return errorHandler(dispatch, error, ActionTypes.AUTH_ERROR);
       Cookie.set('token', response);
-      dispatch({ type: ActionTypes.AUTH_USER });
+      dispatch({ type: ActionTypes.AUTH_USER, payload: email });
       history.push('/');
     });
   };
@@ -63,6 +63,6 @@ export function logoutUser() {
   return (dispatch) => {
     Cookie.remove('token');
     dispatch({ type: ActionTypes.UNAUTH_USER });
-    history.push('/login');
+    history.push('/');
   };
 }
