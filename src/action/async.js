@@ -66,3 +66,20 @@ export function logoutUser() {
     history.push('/');
   };
 }
+
+export function add({ title, content, articleType }) {
+  if (Cookie.get('token')) {
+    return (dispatch) => {
+      api.add({
+        ownerId: Cookie.get('token'),
+        title,
+        content,
+        articleType,
+      }).then(articles => dispatch({
+        type: ActionTypes.FETCH_ARTICLES,
+        payload: articles,
+      }));
+    };
+  }
+  history.push('/login');
+}
