@@ -1,10 +1,15 @@
 import { handleActions } from 'redux-actions';
+import Cookie from 'js-cookie';
 import * as ActionTypes from '../actionTypes';
 
 const initialState = {
   auth: false,
   name: undefined,
 };
+if (Cookie.get('token')) {
+  initialState.auth = true;
+  initialState.name = Cookie.get('token');
+}
 const reducer = handleActions({
   [ActionTypes.AUTH_USER](state, action) {
     return {
