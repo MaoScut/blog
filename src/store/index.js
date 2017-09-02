@@ -43,3 +43,10 @@ export function loginUser({ email, password }, callback) {
     callback(null, email);
   }
 }
+
+export function add(article) {
+  return fetchArticles().then((result) => {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(result.concat(article)));
+    return result.concat(article);
+  });
+}
