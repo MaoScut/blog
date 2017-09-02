@@ -7,3 +7,6 @@ export const FETCH_EXACT_ARTICLES = 'FETCH_EXACT_ARTICLES';
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+
+export const CERTAIN_ARTILCE = 'CERTAIN_ARTICLE';
+export const ADD_ARTICLE = 'ADD_ARTICLE';
