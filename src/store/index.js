@@ -50,3 +50,7 @@ export function add(article) {
     return result.concat(article);
   });
 }
+
+export function fetchPrivateArticles(id) {
+  return fetchArticles().then(result => result.filter(v => v.ownerId === id));
+}
