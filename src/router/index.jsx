@@ -6,7 +6,7 @@ import Editor from '../components/Editor';
 // import Header from '../components/Header';
 // import Login from '../components/Login';
 // import Regist from '../components/Regist';
-import { Home, Header, Login, Regist, Error } from '../components/Connected';
+import { Home, Header, Login, Regist, Error, PrivateArticles } from '../components/Connected';
 import history from '../history';
 
 export default () => (
@@ -20,6 +20,7 @@ export default () => (
       <Route path="/editor/:articleId" component={Editor} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/regist" component={Regist} />
+      <Route exact path="/private" component={PrivateArticles} />
     </div>
   </Router>
 );

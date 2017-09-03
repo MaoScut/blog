@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import articles from './articles';
-import article from './article';
+import privateArticles from './privateArticles';
 import auth from './auth';
 import error from './error';
 
 const root = combineReducers({
   articles,
-  article,
+  privateArticles,
   auth,
   error,
 });

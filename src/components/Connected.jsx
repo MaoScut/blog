@@ -7,6 +7,7 @@ import Header from './Header';
 import Login from './Login';
 import Regist from './Regist';
 import Error from './Error';
+import PrivateArticles from './PrivateArticles';
 
 function mapDispatchToProps(dispatch) {
   return ({
@@ -40,11 +41,17 @@ const CError = connect(
   state => state,
   mapDispatchToProps,
 )(Error);
+
+const CPrivateArticles = connect(
+  state => state,
+  mapDispatchToProps,
+)(PrivateArticles);
 export {
   CHeader as Header,
   CHome as Home,
   CLogin as Login,
   CRegist as Regist,
   CError as Error,
+  CPrivateArticles as PrivateArticles,
 };
 

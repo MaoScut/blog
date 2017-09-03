@@ -83,3 +83,16 @@ export function add({ title, content, articleType }) {
   }
   history.push('/login');
 }
+
+export function myArticles() {
+  const ownerId = Cookie.get('token');
+  return (dispatch) => {
+    api.fetchPrivateArticles(ownerId).then((result) => {
+      dispatch({
+        type: ActionTypes.GET_PRIVATE_ARTICLES,
+        payload: result,
+      });
+      history.push('/private');
+    });
+  };
+}
