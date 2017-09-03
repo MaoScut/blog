@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import List from '../List';
+import { LoginPop, RegistPop } from '../Pop';
 // import * as actions from '../../action/async';
+import './main.scss';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -25,7 +27,8 @@ export default class Home extends React.Component {
       <div>
         <List articles={this.props.articles} />
         <button onClick={this.add}>new article</button>
-        <Link to="/myarticle" >new article </Link>
+        {this.props.pop.login ? <LoginPop onSubmit={this.props.actions.loginUser} onCancel={this.props.actions.toggleLogin} /> : null}
+        {this.props.pop.regist ? <RegistPop onSubmit={this.props.actions.registerUser} onCancel={this.props.actions.toggleRegist} /> : null}
       </div>
     );
   }

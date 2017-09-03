@@ -18,6 +18,7 @@ function mapDispatchToProps(dispatch) {
 const CHome = connect(
   state => ({
     articles: state.articles,
+    pop: state.pop,
   }),
   mapDispatchToProps,
 )(Home);

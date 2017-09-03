@@ -67,6 +67,18 @@ export function logoutUser() {
   };
 }
 
+export function toggleLogin() {
+  return {
+    type: ActionTypes.TOGGLE_LOGIN,
+  };
+}
+
+export function toggleRegist() {
+  return {
+    type: ActionTypes.TOGGLE_REGIST,
+  };
+}
+
 export function add({ title, content, articleType }) {
   if (Cookie.get('token')) {
     return (dispatch) => {
@@ -81,7 +93,7 @@ export function add({ title, content, articleType }) {
       }));
     };
   }
-  history.push('/login');
+  return toggleLogin();
 }
 
 export function myArticles() {
@@ -96,3 +108,5 @@ export function myArticles() {
     });
   };
 }
+
+

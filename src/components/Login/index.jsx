@@ -1,7 +1,4 @@
 import React from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import * as actions from '../../action/async';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -26,21 +23,25 @@ export default class Login extends React.Component {
   render() {
     return (
       <div>
-        email:<input
-          type="text"
-          ref={(input) => {
-            this.emailInput = input;
-          }}
-          onChange={this.saveEmail}
-        />
-        passoword:<input
-          type="password"
-          ref={(input) => {
-            this.passwordInput = input;
-          }}
-          onChange={this.savePassword}
-        />
-        <button onClick={() => this.props.actions.loginUser({ email: this.state.email, password: this.state.password })}>login</button>
+        <div className="grey-cover" />
+        <div className="over-cover">
+          email:<input
+            type="text"
+            ref={(input) => {
+              this.emailInput = input;
+            }}
+            onChange={this.saveEmail}
+          />
+          passoword:<input
+            type="password"
+            ref={(input) => {
+              this.passwordInput = input;
+            }}
+            onChange={this.savePassword}
+          />
+          <button onClick={() => this.props.onSubmit({ email: this.state.email, password: this.state.password })}>login</button>
+          <button onClick={() => this.props.onCancel()}>cancel</button>
+        </div>
       </div>
     );
   }

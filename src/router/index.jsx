@@ -18,8 +18,8 @@ export default () => (
       <Route exact path="/home" component={Home} />
       <Route path="/detail/:articleId" component={Detail} />
       <Route path="/editor/:articleId" component={Editor} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/regist" component={Regist} />
+      {/* <Route exact path="/login" component={Login} />
+      <Route exact path="/regist" component={Regist} /> */}
       <Route exact path="/private" component={PrivateArticles} />
     </div>
   </Router>
