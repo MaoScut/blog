@@ -1,0 +1,60 @@
+[
+  {
+    "articleId": "4444440",
+    "title": "mytitle0",
+    "content": "content0",
+    "ownerId": "4444430",
+    "articleType": "sports"
+  },
+  {
+    "articleId": "4444441",
+    "title": "mytitle1",
+    "content": "content1",
+    "ownerId": "4444431",
+    "articleType": "technique"
+  },
+  {
+    "articleId": "4444442",
+    "title": "mytitle2",
+    "content": "content2",
+    "ownerId": "4444432",
+    "articleType": "nature"
+  },
+  {
+    "articleId": "31ae6050-9c7f-4265-8b5e-6caf1e8fee85",
+    "content": "hhh",
+    "title": "ttt",
+    "articleType": "sports"
+  },
+  {
+    "articleId": "ecf11428-bf7b-44c4-9e6b-475046bade66",
+    "content": "hhh",
+    "title": "ttt",
+    "articleType": "sports"
+  },
+  {
+    "articleId": "acb780f3-81d9-4cb1-8953-74aaeeadf55b",
+    "content": "hhh",
+    "title": "ttt",
+    "articleType": "sports"
+  },
+  {
+    "articleId": "5968c12f-3161-4c84-b107-123bf4e971e4",
+    "content": "hhh",
+    "title": "ttt",
+    "articleType": "sports"
+  },
+  {
+    "articleId": "7264166e-610a-4da2-9643-6614b8659e5b",
+    "content": "hhh",
+    "title": "ttt",
+    "articleType": "sports"
+  },
+  {
+    "articleId": "0d9dc299-00f6-470a-b3fc-baed9b143c18",
+    "content": "hhh",
+    "title": "ttt",
+    "articleType": "sports",
+    "ownerId": "9225dcae-e13d-4dca-87f1-89d84e3c4c9d"
+  }
+]

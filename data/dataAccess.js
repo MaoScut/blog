@@ -1,59 +1,58 @@
 const fs = require('fs');
 const path = require('path');
+const uuid = require('uuid');
 
-function fetchAll(func) {
-  const p = path.join(__dirname, 'article.json');
-  fs.readFile(p, 'utf8', (err, data) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    // 只是返回字符串而已，转化为数组自己去搞
-    func(data);
-  });
-}
-function readAndWrite() {
-  // const p = path.join(__dirname, 'article.json');  
-  // fs.open(p, 'rw', (err, fd) => {
-  //   if (err) {
-  //     console.log(err);
-  //     return;
-  //   }
-  //   fs.read(fd, 'utf8', (err, data) => {
-  //     if (err) {
-  //       console.log(err);
-  //       // return;
-  //     }
-  //     const orginArr = JSON.parse(data);
-  //     fs.write(fd,)
-  //   })
-  // })
-  const p = path.join(__dirname, 'article.json');
-  fs.readFile(p, 'utf8', (err, data) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    // 只是返回字符串而已，转化为数组自己去搞
-    const originArr = JSON.parse(data);
-    const newData = JSON.stringify(originArr.concat({
-      articleId: '4444442',
-      title: 'mytitle2',
-      content: 'content2',
-      ownerId: '4444432',
-      articleType: 'nature',
-    }));
-    fs.writeFile(p, newData, (e) => {
-      if (e) console.log(e);
-      fs.readFile(p, 'utf8', (er, d) => {
-        if (e) {
-          console.log(e);
-        }
-        console.log(JSON.parse(d).length);
-      });
+const articlePath = path.join(__dirname, 'article.json');
+const accountPath = path.join(__dirname, 'account.json');
+function readAll(p) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(p, 'utf8', (err, data) => {
+      if (err) reject(err);
+      resolve(JSON.parse(data));
     });
   });
 }
-console.log('hhh');
-// fetchAll((data) => console.log(JSON.parse(data)));
-readAndWrite();
+function writeAll(arr, p) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(p, JSON.stringify(arr, null, 2), (e) => {
+      if (e) reject(e);
+      resolve(arr);
+    });
+  });
+}
+
+// 文章
+function addNewArticle(article) {
+  readAll(articlePath).then((articles) => {
+    const newArticles = articles.concat(article);
+    return writeAll(newArticles, articlePath);
+  }).then(articles => console.log(articles.length));
+}
+
+addNewArticle({
+  articleId: uuid.v4(),
+  content: 'hhh',
+  title: 'ttt',
+  articleType: 'sports',
+  ownerId: '9225dcae-e13d-4dca-87f1-89d84e3c4c9d',
+});
+
+// 账户
+function addNewAccount({ email, password }) {
+  readAll(accountPath).then((accounts) => {
+    if (accounts.find(v => v.email === email)) {
+      throw Error(`there has been an account with email: ${email}`);
+    } else {
+      return accounts.concat({
+        id: uuid.v4(),
+        email,
+        password,
+      });
+    }
+  }).then(accounts => writeAll(accounts, accountPath))
+    .then(accounts => console.log(accounts.length));
+}
+// addNewAccount({
+//   email: uuid.v4(),
+//   password: 123,
+// });
