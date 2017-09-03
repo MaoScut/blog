@@ -6,14 +6,14 @@ import Editor from '../components/Editor';
 // import Header from '../components/Header';
 // import Login from '../components/Login';
 // import Regist from '../components/Regist';
-import { Home, Header, Login, Regist, Error, PrivateArticles } from '../components/Connected';
+import { Home, Header, Error, PrivateArticles } from '../components/Connected';
 import history from '../history';
 
 export default () => (
   <Router history={history}>
     <div>
       <Route path="/" component={Header} />
-      <Route path="/" component={Error} />      
+      <Route path="/" component={Error} />
       <Route exact path="/" component={Home} />
       <Route exact path="/home" component={Home} />
       <Route path="/detail/:articleId" component={Detail} />
