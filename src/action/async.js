@@ -109,4 +109,32 @@ export function myArticles() {
   };
 }
 
+export function showEditor() {
+  if (Cookie.get('token')) {
+    return {
+      type: ActionTypes.SHOW_EDITOR,
+    };
+  }
+  return toggleLogin();
+}
+export function cancelEdit() {
+  return {
+    type: ActionTypes.HIDE_EDITOR,
+  };
+}
 
+export function saveArticle(article) {
+  return (dispatch) => {
+    api.save(article)
+      .then(() => dispatch(fetchArticles()))
+      .then(() => dispatch({
+        type: ActionTypes.HIDE_EDITOR,
+      }));
+  };
+}
+
+export function deleteArticle(id) {
+  return (dispatch) => {
+    api.deleteArticle(id).then(() => dispatch(myArticles()));
+  };
+}

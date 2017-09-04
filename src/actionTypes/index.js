@@ -14,3 +14,6 @@ export const GET_PRIVATE_ARTICLES = 'GET_PRIVATE_ARTICLES';
 
 export const TOGGLE_LOGIN = 'TOGGLE_LOGIN';
 export const TOGGLE_REGIST = 'TOGGLE_REGIST';
+
+export const SHOW_EDITOR = 'SHOW_EDITOR';
+export const HIDE_EDITOR = 'HIDE_EDOTOR';

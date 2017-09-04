@@ -1,3 +1,6 @@
+import uuid from 'uuid';
+import Cookie from 'js-cookie';
+
 const STORAGE_KEY = 'BLOG';
 const REGIST_LOGIN = 'REGIST_LOGIN';
 
@@ -11,6 +14,7 @@ export function fetchArticles() {
     }, 2000);
   });
 }
+
 export function receiveArticles() {
   
 }
@@ -45,6 +49,8 @@ export function loginUser({ email, password }, callback) {
 }
 
 export function add(article) {
+  article.articleId = uuid.v4();
+  article.ownerId = Cookie.get('token');
   return fetchArticles().then((result) => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(result.concat(article)));
     return result.concat(article);
@@ -53,4 +59,29 @@ export function add(article) {
 
 export function fetchPrivateArticles(id) {
   return fetchArticles().then(result => result.filter(v => v.ownerId === id));
+}
+
+function updateArticle(article) {
+  return fetchArticles().then((articles) => {
+    const index = articles.findIndex(v => v.id === articles.id);
+    const newArticles = articles.slice();
+    newArticles[index] = article;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newArticles));
+  });
+}
+
+export function save(article) {
+  if (article.id) {
+    // 有id，是更新
+    return updateArticle(article);
+  }
+  // 无id，是新建
+  return add(article);
+}
+
+export function deleteArticle(id) {
+  return fetchArticles().then((articles) => {
+    const rest = articles.filter(v => v.articleId !== id);
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(rest));
+  });
 }
