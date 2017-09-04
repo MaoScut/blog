@@ -26,7 +26,7 @@ class Detail extends React.Component {
     return (
       <div>
         {content}
-        <button onClick={this.handleClick}>跳转</button>
+        {/* <button onClick={this.handleClick}>跳转</button> */}
       </div>
     );
   }
