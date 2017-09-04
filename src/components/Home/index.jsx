@@ -4,31 +4,33 @@ import { Link } from 'react-router-dom';
 // import { bindActionCreators } from 'redux';
 import List from '../List';
 import { LoginPop, RegistPop } from '../Pop';
+import Editor from '../Editor';
 // import * as actions from '../../action/async';
 import './main.scss';
 
 export default class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.add = this.add.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.add = this.add.bind(this);
+  // }
   componentDidMount() {
     this.props.actions.fetchArticles();
   }
-  add() {
-    this.props.actions.add({
-      title: 'aa',
-      content: 'bb',
-      articleType: 'cc',
-    });
-  }
+  // add() {
+  //   this.props.actions.add({
+  //     title: 'aa',
+  //     content: 'bb',
+  //     articleType: 'cc',
+  //   });
+  // }
   render() {
     return (
       <div>
         <List articles={this.props.articles} />
-        <button onClick={this.add}>new article</button>
+        <button onClick={this.props.actions.showEditor}>new article</button>
         {this.props.pop.login ? <LoginPop onSubmit={this.props.actions.loginUser} onCancel={this.props.actions.toggleLogin} /> : null}
         {this.props.pop.regist ? <RegistPop onSubmit={this.props.actions.registerUser} onCancel={this.props.actions.toggleRegist} /> : null}
+        {this.props.edit.isEditing ? <Editor article={this.props.edit.article} onSave={this.props.actions.saveArticle} onCancel={this.props.actions.cancelEdit} /> : null}
       </div>
     );
   }
