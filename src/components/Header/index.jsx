@@ -19,7 +19,7 @@ export default function ({ auth, actions }) {
     <div className="header">
       <img src="/images/logo.png" alt="logo" />
       {/* <div className="search" /> */}
-      <div className="right"><button>home</button></div>
+      <div className="right"><Link to="/home">Home</Link></div>
       <div className="right"><button onClick={() => actions.toggleRegist()}>regist</button></div>
       <div className="right"><button onClick={() => actions.toggleLogin()}>login</button></div>
       {/* <div><button>search</button></div>
