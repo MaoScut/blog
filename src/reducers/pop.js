@@ -7,10 +7,10 @@ const initialState = {
 };
 const reducer = handleActions({
   [ActionTypes.TOGGLE_LOGIN](state) {
-    return { login: !state.login };
+    return { ...state, login: !state.login };
   },
   [ActionTypes.TOGGLE_REGIST](state) {
-    return { regist: !state.regist };
+    return { ...state, regist: !state.regist };
   },
   // 登录成功或者注册成功，都要关闭弹框
   [ActionTypes.AUTH_USER]() {
