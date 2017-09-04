@@ -1,33 +1,55 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { Editor, EditorState } from 'draft-js';
-import * as actions from '../../action/async';
 // 先实现更新
-class MyEditor extends React.Component {
-  componentDidMount() {
-    this.props.actions.fetchExactArticle(this.props.match.params.articleId);
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
+    this.save = this.save.bind(this);
+    this.saveArticleType = this.saveArticleType.bind(this);
+    this.saveTitle = this.saveTitle.bind(this);
+    this.saveContent = this.saveContent.bind(this);
+    if (this.props.article) {
+      this.state = {
+        ...this.props.article,
+      };
+    } else {
+      this.state = {
+        title: '',
+        content: '',
+        articleType: '',
+      };
+    }
+  }
+  // componentDidMount() {
+  //   this.props.actions.fetchExactArticle(this.props.match.params.articleId);
+  // }
+  saveTitle() {
+    this.setState({
+      title: this.titleInput.value,
+    });
+  }
+  saveContent() {
+    this.setState({
+      content: this.contentInput.value,
+    });
+  }
+  saveArticleType() {
+    this.setState({
+      articleType: this.articleTypeInput.value,
+    });
+  }
+  save() {
+    this.props.onSave(this.state);
   }
   render() {
-    let title, articleType, content;
-    let params = this.props.match.params;
-    if (params.articleId === undefined) {
-      // 没传入参数，那么对应新建文章，所有都显示为空
-      [title, articleType, content] = ['', '', ''];
-    } else if (this.props.article === null) {
-      // 等待获取文章数据，显示loading
-      [title, articleType, content] = ['loading', 'loading', 'loading'];      
-    } else {
-      // { title, articleType, content } = this.props.article;
-      title = this.props.article.title;
-      content = this.props.article.content;
-      articleType = this.props.article.articleType;
-    }
     return (
       <div>
-        标题<input type="text" value={title} />
-        分类<input type="text" value={articleType} />
-        内容<input type="text" value={content} />
+        标题<input type="text" value={this.state.title} ref={input => this.titleInput = input} onChange={this.saveTitle} />
+        分类<input type="text" value={this.state.articleType} ref={input => this.articleTypeInput = input} onChange={this.saveArticleType} />
+        内容<input type="text" value={this.state.content} ref={input => this.contentInput = input} onChange={this.saveContent} />
+        <button onClick={this.save}>add/update</button>
+        <button onClick={() => this.props.onCancel()}>cancel</button>
       </div>
     );
   }
@@ -53,11 +75,3 @@ class MyEditor extends React.Component {
 //     </div>
 //   );
 // }
-export default connect(
-  state => ({
-    article: state.article,
-  }),
-  dispatch => ({
-    actions: bindActionCreators(actions, dispatch),
-  }),
-)(MyEditor);
