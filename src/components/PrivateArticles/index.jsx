@@ -1,11 +1,8 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-import List from '../List';
-// import * as actions from '../../action/async';
+import { ListFactory } from '../List';
+import DeleteLi from '../OptionalItem';
 
-
-export default function ({ privateArticles }) {
-  return <List articles={privateArticles || []} />;
+const List = ListFactory(DeleteLi);
+export default function ({ privateArticles, actions }) {
+  return <List articles={privateArticles || []} onDelete={actions.deleteArticle} />;
 }
