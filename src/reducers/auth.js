@@ -6,9 +6,9 @@ const initialState = {
   auth: false,
   name: undefined,
 };
-if (Cookie.get('token')) {
+if (Cookie.get('email')) {
   initialState.auth = true;
-  initialState.name = Cookie.get('token');
+  initialState.name = Cookie.get('email');
 }
 const reducer = handleActions({
   [ActionTypes.AUTH_USER](state, action) {
