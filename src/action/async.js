@@ -1,6 +1,8 @@
 import Cookie from 'js-cookie';
 import * as ActionTypes from '../actionTypes';
-import * as api from '../store';
+// import * as api from '../store';
+import * as api from '../store/ajax';
+
 import history from '../history';
 
 export function fetchArticles() {
@@ -39,20 +41,14 @@ function errorHandler(dispatch, error, type) {
 
 export function registerUser({ email, password }) {
   return (dispatch) => {
-    api.registerUser({ email, password }, (error, response) => {
-      if (error) return errorHandler(dispatch, error, ActionTypes.AUTH_ERROR);
-      Cookie.set('token', response);
-      dispatch({ type: ActionTypes.AUTH_USER });
-      history.push('/');
-    });
+    api.registerUser({ email, password })
+      .then(data => dispatch({ type: ActionTypes.AUTH_USER, payload: data }));
   };
 }
 
 export function loginUser({ email, password }) {
   return (dispatch) => {
-    api.loginUser({ email, password }, (error, response) => {
-      if (error) return errorHandler(dispatch, error, ActionTypes.AUTH_ERROR);
-      Cookie.set('token', response);
+    api.loginUser({ email, password }).then(() => {
       dispatch({ type: ActionTypes.AUTH_USER, payload: email });
       history.push('/');
     });
@@ -80,7 +76,7 @@ export function toggleRegist() {
 }
 
 export function add({ title, content, articleType }) {
-  if (Cookie.get('token')) {
+  if (Cookie.get('sid')) {
     return (dispatch) => {
       api.add({
         ownerId: Cookie.get('token'),
@@ -97,9 +93,10 @@ export function add({ title, content, articleType }) {
 }
 
 export function myArticles() {
-  const ownerId = Cookie.get('token');
+  // const ownerId = Cookie.get('token');
+  // const ownId = Cookie.get();
   return (dispatch) => {
-    api.fetchPrivateArticles(ownerId).then((result) => {
+    api.fetchPrivateArticles().then((result) => {
       dispatch({
         type: ActionTypes.GET_PRIVATE_ARTICLES,
         payload: result,
@@ -110,7 +107,7 @@ export function myArticles() {
 }
 
 export function showEditor() {
-  if (Cookie.get('token')) {
+  if (Cookie.get('sid')) {
     return {
       type: ActionTypes.SHOW_EDITOR,
     };
