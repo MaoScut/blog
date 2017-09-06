@@ -7,6 +7,7 @@ function ajax(method, url, data) {
         resolve(xhr.responseText);
       } else if (xhr.status >= 400) reject(xhr.responseText);
     };
+    xhr.setRequestHeader('Accept', 'application/json');
     xhr.setRequestHeader('content-type', 'application/json');
     if (data) xhr.send(JSON.stringify(data));
     else xhr.send();
