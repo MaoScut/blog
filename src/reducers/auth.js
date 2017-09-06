@@ -6,7 +6,7 @@ const initialState = {
   auth: false,
   name: undefined,
 };
-if (Cookie.get('email')) {
+if (Cookie.get('sid')) {
   initialState.auth = true;
   initialState.name = Cookie.get('email');
 }
