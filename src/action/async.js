@@ -57,7 +57,8 @@ export function loginUser({ email, password }) {
 
 export function logoutUser() {
   return (dispatch) => {
-    Cookie.remove('token');
+    Cookie.remove('sid');
+    Cookie.remove('email');
     dispatch({ type: ActionTypes.UNAUTH_USER });
     history.push('/');
   };
