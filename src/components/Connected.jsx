@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../action/async';
 import Home from './Home';
 import Header from './Header';
-import Login from './Login';
+import { LoginPop } from './Pop';
 import Regist from './Regist';
 import Error from './Error';
 import PrivateArticles from './PrivateArticles';
@@ -27,8 +27,11 @@ const CHeader = connect(
 
 const CLogin = connect(
   state => state,
-  mapDispatchToProps,
-)(Login);
+  dispatch => ({
+    onSubmit: bindActionCreators(actions.loginUser, dispatch),
+    onCancel: bindActionCreators(actions.toggleLogin, dispatch),
+  }),
+)(LoginPop);
 
 const CRegist = connect(
   state => state,
