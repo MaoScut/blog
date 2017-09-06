@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'redux';
+import { connect } from 'react-redux';
 
 import history from '../../history';
 
@@ -25,7 +25,7 @@ export default function (ComposedComponent) {
   }
   return connect(
     state => ({
-      authenticated: state.auth.authenticated,
-    })(Authentication),
-  );
+      authenticated: state.auth.auth,
+    }),
+  )(Authentication);
 }
