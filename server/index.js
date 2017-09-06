@@ -8,7 +8,7 @@ const config = require('../webpack.config.selfserver');
 const path = require('path');
 const Express = require('express');
 const FileStore = require('session-file-store')(session);
-// const history = require('connect-history-api-fallback');
+const history = require('connect-history-api-fallback');
 // const RedisStore = require('connect-redis')(session);
 const serveStatic = require('serve-static');
 const database = require('./data');
@@ -29,7 +29,12 @@ app.use(cookieParser());
 //   if (res.status === 404) console.log('333');
 //   else next();
 // });
-// app.use(history());
+app.use(history({
+  index: '/index.html',
+  // disableDotRule: true,
+  verbose: true,
+}));
+app.use(serveStatic(path.resolve('./dist')));
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
   // contentBase: './dist',
@@ -76,7 +81,7 @@ app.post('/regist', (req, res) => {
       if (err) console.log(err);
       else console.log('save session');
     });
-    res.setHeader('Set-Cookie', [`token=${req.sessionID}`, [`email=${acc.email}`]]);
+    res.setHeader('Set-Cookie', [`sid=${req.sessionID}`, [`email=${acc.email}`]]);
     res.end();
   });
 });
