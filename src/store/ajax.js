@@ -9,8 +9,9 @@ function ajax(method, url, data) {
     };
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.setRequestHeader('content-type', 'application/json');
-    if (data) xhr.send(JSON.stringify(data));
-    else xhr.send();
+    if (data !== undefined) {
+      xhr.send(JSON.stringify(data));
+    } else xhr.send();
   });
 }
 export function fetchArticles() {
