@@ -12,6 +12,7 @@ export default () => (
       <Route path="/" component={Header} />
       <Route path="/" component={Error} />
       <Route exact path="/" component={Home} />
+      <Route exact path="/index.html" component={Home} />      
       <Route exact path="/login" component={Login} />
       <Route path="/detail/:articleId" component={Detail} />
       <Route path="/editor/:articleId" component={Editor} />
