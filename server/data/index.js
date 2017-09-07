@@ -114,10 +114,7 @@ function registerUser(email, password) {
 function fetchPrivateArticles(id) {
   return getAllArticles()
     .then(data => JSON.parse(data))
-    .then(result => {
-      const r = result.filter(v => v.ownerId === id);
-      return r;
-    })
+    .then(result => result.filter(v => v.ownerId === id))
     .then(result => JSON.stringify(result || []));
 }
 
